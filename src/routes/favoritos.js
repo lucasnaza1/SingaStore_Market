@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getFavoritos } from '../services/favoritos';
+import { deleteFavoritos, getFavoritos } from '../services/favoritos';
 import styled from 'styled-components';
 
 const AppContainer = styled.div`
@@ -43,7 +43,20 @@ const Titulo = styled.h2`
    width: 100%;
    padding-top: 35px
 `
+const BotaoDeletar = styled.button`
+  background-color: #ff0000;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  cursos: pointer;
+  margin-left: 20px;
 
+  &:hover {
+    background-color: #cc0000;
+    }
+
+`
 
 
 function Favoritos() {
@@ -54,18 +67,24 @@ function Favoritos() {
         setFavoritos(favoritosDaAPI)
     }
 
+    async function removerFavorito(id) {
+        await deleteFavoritos(id)
+        await fetchFavoritos()
+        alert(`Livro de id ${id} removido dos favoritos!`)
+    }
+
     useEffect(() => {
         fetchFavoritos([])
     }, [])
-
     return (
         <AppContainer>
             <div>
-                <Titulo>Aqui estão seus livros favoritos:</Titulo>
+                <Titulo>Aqui estão seus itens favoritos:</Titulo>
                 <ResultadoContainer>
                     {
                         favoritos.length !== 0 ? favoritos.map(favorito => (
                             <Resultado>
+                                <BotaoDeletar onClick={() => removerFavorito(favorito.id)}> X </BotaoDeletar>
                                 <p>{favorito.nome}</p>
                             </Resultado>
                         )) : null
