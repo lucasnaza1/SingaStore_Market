@@ -1,70 +1,42 @@
-# Getting Started with Create React App
+# Singastore - Projeto Reformulado
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este projeto foi reformulado para uma arquitetura Full Stack utilizando React no frontend, Express no backend e MySQL como banco de dados, todos orquestrados via Docker.
 
-## Available Scripts
+## Estrutura do Projeto
 
-In the project directory, you can run:
+- `frontend/`: Aplicação React (antigo root do projeto).
+- `backend/`: API Express com conexão MySQL.
+- `docker-compose.yml`: Configuração para rodar todos os serviços.
 
-### `npm start`
+## Como Rodar
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Pré-requisitos
+- Docker e Docker Compose instalados.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Passo a Passo
 
-### `npm test`
+1. **Subir os containers:**
+   ```bash
+   docker-compose up --build
+   ```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. **Acessar as aplicações:**
+   - Frontend: [http://localhost:3000](http://localhost:3000)
+   - Backend: [http://localhost:3001](http://localhost:3001)
+   - MySQL: `localhost:3306`
 
-### `npm run build`
+## Plano de Migração Detalhado
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+O plano de migração seguiu os seguintes passos:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. **Reorganização de Pastas:** Mover o código React existente para uma pasta `frontend/`.
+2. **Criação do Backend:** Inicializar um servidor Express básico em `backend/`.
+3. **Containerização:** Criação de `Dockerfiles` específicos para frontend e backend.
+4. **Orquestração:** Criação do `docker-compose.yml` para gerenciar o banco de dados MySQL e os dois serviços.
+5. **Integração:** (Próximo passo) Atualizar os serviços no frontend para apontarem para a nova API do backend.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Próximos Passos
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- [ ] Criar scripts de migração do banco de dados (tabelas de itens, favoritos, etc).
+- [ ] Atualizar as chamadas de API no frontend em `frontend/src/services/`.
+- [ ] Implementar autenticação (se necessário).
