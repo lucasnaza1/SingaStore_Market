@@ -1,46 +1,99 @@
 import styled from "styled-components";
 
 const PesquisaContainer = styled.section`
-        background-image: linear-gradient(90deg, #02511cff 35%, #2b993dff 165%);
-        color: #FFF;
+        background-color: ${props => props.theme.background};
+        color: ${props => props.theme.text};
         text-align: center;
-        padding: 85px 0;
-        height: 270px;
+        padding: 100px 2rem;
         width: 100%;
+        min-height: 80vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
 `
 
 const Titulo = styled.h2`
-        color: #FFF;
-        font-size: 36px;
-        text-align: center;
-        width: 100%;
+        font-size: 48px;
+        margin-bottom: 0.5rem;
 `
 
 const Subtitulo = styled.h3`
-        font-size: 16px;
-        font-weight: 500;
-        margin-bottom: 40px;
+        font-size: 14px;
+        font-family: ${props => props.theme.fontCode};
+        color: ${props => props.theme.secondary};
+        margin-bottom: 3rem;
+        letter-spacing: 4px;
 `
 const Conteudo = styled.div`
-        display: flex;
-        justify-content: center;
-        align-content: center;
-        font-size: 18px;
-        padding: 4px 120px;
+        max-width: 800px;
+        font-size: 20px;
+        line-height: 1.8;
+        font-style: italic;
+        position: relative;
+        
+        &::before {
+            content: '"';
+            position: absolute;
+            left: -40px;
+            top: -20px;
+            font-size: 80px;
+            color: ${props => props.theme.primary}22;
+            font-family: serif;
+        }
+`
+
+const Estatisticas = styled.div`
+    display: flex;
+    gap: 4rem;
+    margin-top: 4rem;
+`
+
+const StatItem = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    span:first-child {
+        font-family: ${props => props.theme.fontCode};
+        font-size: 24px;
+        color: ${props => props.theme.primary};
+    }
+
+    span:last-child {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: ${props => props.theme.text}88;
+    }
 `
 
 function Lore() {
-
     return (
         <PesquisaContainer>
-            <Titulo>Quem é o Singas?</Titulo>
-            <Subtitulo>Singed, o químico louco</Subtitulo>
+            <Titulo>Protocolo de Laboratório</Titulo>
+            <Subtitulo>RELATÓRIO DE EXPERIMENTAÇÃO #001</Subtitulo>
             <Conteudo>
-                Singed é um alquimista brilhante com moral duvidosa cujos experimentos embrulhariam o estômago até do criminoso mais brutal.
-                Vendendo suas habilidades para quem paga mais, ele pouco se importa com o uso que fazem de suas misturas nocivas e vê o caos subsequente como mais um experimento.
-                Sua criação mais infame é a "cintila", que deu aos Barões da Química o poder sobre Zaun.
-                Impulsionado pela loucura, Singed sempre está trabalhando em algo novo, cada empreitada mais perversa que a anterior…
+                A moral é uma restrição química para mentes fracas. No meu laboratório, não há espaço para remorso, apenas para resultados. 
+                Cada mistura, cada vapor tóxico, é um passo em direção à evolução necessária. 
+                Você busca poder? Eficiência? Sobrevivência? 
+                Saiba que o progresso exige sacrifício... geralmente o de outros. 
+                Beba. Observe. Evolua. Ou torne-se apenas mais um resíduo no chão de Zaun.
             </Conteudo>
+            <Estatisticas>
+                <StatItem>
+                    <span>99.9%</span>
+                    <span>Pureza Nociva</span>
+                </StatItem>
+                <StatItem>
+                    <span>0</span>
+                    <span>Vítimas... Sobreviventes</span>
+                </StatItem>
+                <StatItem>
+                    <span>∞</span>
+                    <span>Progresso</span>
+                </StatItem>
+            </Estatisticas>
         </PesquisaContainer>
     )
 }

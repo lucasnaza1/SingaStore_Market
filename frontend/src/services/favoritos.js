@@ -3,17 +3,29 @@ import axios from "axios";
 const favoritosAPI = axios.create({ baseURL: `${process.env.REACT_APP_API_URL || 'http://localhost:3001'}` })
 
 async function getFavoritos() {
-    const response = await favoritosAPI.get('/favoritos')
-
-    return response.data
+    try {
+        const response = await favoritosAPI.get('/favoritos')
+        return response.data
+    } catch (error) {
+        console.error('Erro ao buscar favoritos:', error)
+        return []
+    }
 }
 
 async function postFavoritos(id) {
-    await favoritosAPI.post(`/favoritos/${id}`)
+    try {
+        await favoritosAPI.post(`/favoritos/${id}`)
+    } catch (error) {
+        console.error('Erro ao adicionar favorito:', error)
+    }
 }
 
 async function deleteFavoritos(id) {
-    await favoritosAPI.delete(`/favoritos/${id}`)
+    try {
+        await favoritosAPI.delete(`/favoritos/${id}`)
+    } catch (error) {
+        console.error('Erro ao remover favorito:', error)
+    }
 }
 
 export {

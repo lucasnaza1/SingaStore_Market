@@ -5,18 +5,25 @@ const rotasPaginas = ['ITENS', 'FAVORITOS']
 
 const PaginasContainer = styled.ul`
      display: flex;
+     gap: 2rem;
 `
 const PaginaTexto = styled.li`
     list-style: none;
-    min-width: 8rem;
     font-size: 1rem;
+    font-family: ${props => props.theme.fontDisplay};
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     height: 100%;
-    padding: 0 0.5rem;
     cursor: pointer;
+    color: ${props => props.theme.text};
+    letter-spacing: 1px;
+    
+    &:hover {
+        color: ${props => props.theme.primary};
+        text-shadow: 0 0 10px ${props => props.theme.primary}66;
+    }
 `
 
 function Paginas() {

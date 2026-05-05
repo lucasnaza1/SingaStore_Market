@@ -3,15 +3,19 @@ import styled from 'styled-components'
 
 const LogoContainer = styled.div`
   display: flex;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   align-items: center;
+  font-family: ${props => props.theme.fontDisplay};
+  color: ${props => props.theme.primary};
+  letter-spacing: 2px;
+  text-transform: uppercase;
 `
 
 const LogoImage = styled.img`
   margin-right: 1rem;
-  width: 5rem;
-  height: 5rem;
-  border-radius: 50%;
+  width: 3.5rem;
+  height: 3.5rem;
+  filter: drop-shadow(0 0 5px ${props => props.theme.primary}66);
 `
 
 function Logo(){

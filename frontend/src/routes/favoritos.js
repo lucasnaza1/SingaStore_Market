@@ -3,12 +3,9 @@ import { deleteFavoritos, getFavoritos } from '../services/favoritos';
 import styled from 'styled-components';
 
 const AppContainer = styled.div`
-    width: 100vw;
-    height: 100vh;
-    background-image: linear-gradient(90deg, #26b928 30%, #68bd69 100%);
-
-  li{
-    list-style: none;
+    width: 100%;
+    min-height: 100vh;
+    background-color: ${props => props.theme.body};
 `
 const ResultadoContainer = styled.div`
    display: flex;
@@ -20,40 +17,50 @@ const Resultado = styled.div`
    display: flex;
    justify-content: center;
    align-items: center;
-   margin: 20px 0;
+   margin: 20px;
    cursor: pointer;
    text-align: center;
-   padding: 0 100px;
+   padding: 20px;
+   background-color: ${props => props.theme.cardBackground};
+   border: 1px solid ${props => props.theme.border};
+   border-radius: 8px;
+   transition: all 0.3s ease;
+
    p {
        width: 200px;
-       color: #FFF;
+       color: ${props => props.theme.text};
+       font-family: ${props => props.theme.fontDisplay};
    }
    img {
        width: 100px;
    }
    &:hover {
-       border: 1px solid white;
+       border-color: ${props => props.theme.primary};
+       background-color: ${props => props.theme.cardHover};
    }
 `
 
 const Titulo = styled.h2`
-   color: #FFF;
+   color: ${props => props.theme.primary};
    font-size: 36px;
    text-align: center;
    width: 100%;
-   padding-top: 35px
+   padding-top: 35px;
+   font-family: ${props => props.theme.fontDisplay};
 `
 const BotaoDeletar = styled.button`
-  background-color: #ff0000;
-  color: white;
-  border: none;
+  background-color: transparent;
+  color: ${props => props.theme.secondary};
+  border: 1px solid ${props => props.theme.secondary};
   border-radius: 5px;
   padding: 10px 15px;
-  cursos: pointer;
+  cursor: pointer;
   margin-left: 20px;
+  font-family: ${props => props.theme.fontCode};
 
   &:hover {
-    background-color: #cc0000;
+    background-color: ${props => props.theme.secondary};
+    color: ${props => props.theme.body};
     }
 
 `

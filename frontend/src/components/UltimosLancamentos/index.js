@@ -4,16 +4,18 @@ import CardRecomenda from '../cardRecomenda/index'
 import solasSimbioticas from '../../img/solas-simbioticas.png'
 
 const UltimosLancamentosContainer = styled.section`
-    background-color: #EBECEE;
-    padding-bottom: 20px;
+    background-color: ${props => props.theme.background};
+    padding: 60px 0;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    border-top: 1px solid ${props => props.theme.border};
 `
 function UltimosLancamentos(){
     return(
         <UltimosLancamentosContainer>
             <Titulo 
-                cor = '#2b993dff'
+                cor = {props => props.theme.secondary}
                 > ÚLTIMOS LANÇAMENTOS
             </Titulo>
             <CardRecomenda
