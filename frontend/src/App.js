@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import { darkTheme, lightTheme } from './theme';
+import { CartProvider } from './contexts/CartContext';
 import Header from './components/Header';
 import Home from './routes/home';
 import Itens from './routes/itens';
@@ -68,15 +69,17 @@ function App() {
 
   return (
     <ThemeProvider theme={theme === 'dark' ? darkTheme : lightTheme}>
-      <GlobalStyle />
-      <BrowserRouter>
-        <Header toggleTheme={toggleTheme} currentTheme={theme} />
-        <Routes>
-          <Route path='/favoritos' element={<Favoritos />} />
-          <Route path='/itens' element={<Itens />} />
-          <Route path='/' element={<Home />} />
-        </Routes>
-      </BrowserRouter>
+      <CartProvider>
+        <GlobalStyle />
+        <BrowserRouter>
+          <Header toggleTheme={toggleTheme} currentTheme={theme} />
+          <Routes>
+            <Route path='/favoritos' element={<Favoritos />} />
+            <Route path='/itens' element={<Itens />} />
+            <Route path='/' element={<Home />} />
+          </Routes>
+        </BrowserRouter>
+      </CartProvider>
     </ThemeProvider>
   );
 }
