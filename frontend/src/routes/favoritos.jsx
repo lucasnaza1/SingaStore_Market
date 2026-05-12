@@ -27,12 +27,11 @@ const Resultado = styled.div`
    transition: all 0.3s ease;
 
    p {
-       width: 200px;
+       max-width: 260px;
        color: ${props => props.theme.text};
        font-family: ${props => props.theme.fontDisplay};
-   }
-   img {
-       width: 100px;
+       overflow-wrap: anywhere;
+       margin: 0;
    }
    &:hover {
        border-color: ${props => props.theme.primary};
@@ -77,11 +76,11 @@ function Favoritos() {
     async function removerFavorito(id) {
         await deleteFavoritos(id)
         await fetchFavoritos()
-        alert(`Livro de id ${id} removido dos favoritos!`)
+        alert(`Item de id ${id} removido dos favoritos!`)
     }
 
     useEffect(() => {
-        fetchFavoritos([])
+        fetchFavoritos()
     }, [])
     return (
         <AppContainer>

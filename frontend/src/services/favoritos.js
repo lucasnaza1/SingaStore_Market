@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const favoritosAPI = axios.create({ baseURL: `${process.env.REACT_APP_API_URL || 'http://localhost:3001'}` })
+const apiBaseURL = import.meta.env.VITE_API_URL || 'http://localhost:3001'
+const favoritosAPI = axios.create({ baseURL: apiBaseURL })
 
 async function getFavoritos() {
     try {

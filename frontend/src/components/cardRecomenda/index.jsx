@@ -53,12 +53,18 @@ const Subtitulo = styled.h4`
     margin: 10px 0;
 `
 
-const ImgLivro = styled.img`
-    width: 180px;
-    filter: drop-shadow(0 0 10px ${props => props.theme.secondary}44);
+const CardMark = styled.div`
+    width: 140px;
+    height: 140px;
+    border-radius: 28px;
+    border: 1px solid ${props => props.theme.border};
+    background: radial-gradient(circle at 30% 30%, ${props => props.theme.secondary}44, transparent 60%),
+      radial-gradient(circle at 70% 70%, ${props => props.theme.primary}33, transparent 65%),
+      ${props => props.theme.cardBackground};
+    box-shadow: 0 0 22px ${props => props.theme.secondary}1f;
 `
 
-function CardRecomenda({titulo, subtitulo, descricao, img}) {
+function CardRecomenda({titulo, subtitulo, descricao}) {
     return (
         <Card>
             <div>
@@ -67,7 +73,7 @@ function CardRecomenda({titulo, subtitulo, descricao, img}) {
                 <Descricao>{descricao}</Descricao>
             </div>
             <div>
-                <ImgLivro src={img}/>
+                <CardMark aria-hidden="true" />
                 <Botao>Analisar Componente</Botao>
             </div>
         </Card>  

@@ -42,6 +42,7 @@ const Resultado = styled.div`
     .info {
         text-align: left;
         flex: 1;
+        min-width: 0;
     }
 
     .nome {
@@ -49,6 +50,7 @@ const Resultado = styled.div`
         color: ${props => props.theme.primary};
         font-size: 1.2rem;
         margin: 0;
+        overflow-wrap: anywhere;
     }
 
     .detalhes {
@@ -58,6 +60,7 @@ const Resultado = styled.div`
         margin-top: 0.5rem;
         display: flex;
         gap: 1rem;
+        flex-wrap: wrap;
     }
 
     .tipo {
@@ -75,12 +78,22 @@ const Resultado = styled.div`
         font-weight: bold;
         font-size: 1.1rem;
         margin-left: 1rem;
+        white-space: nowrap;
     }
 
-    img {
-        width: 80px;
+    .glyph {
+        width: 58px;
+        height: 58px;
+        border-radius: 14px;
         margin-right: 1.5rem;
-        filter: drop-shadow(0 0 5px ${props => props.theme.primary}44);
+        flex-shrink: 0;
+        border: 1px solid ${props => props.theme.border};
+        background: ${props => {
+            if (props.tipo === 'berserk') return `radial-gradient(circle at 30% 30%, ${props.theme.secondary}55, transparent 60%), ${props.theme.cardBackground}`;
+            if (props.tipo === 'cura') return `radial-gradient(circle at 30% 30%, ${props.theme.primary}55, transparent 60%), ${props.theme.cardBackground}`;
+            return `radial-gradient(circle at 30% 30%, #60a5fa55, transparent 60%), ${props.theme.cardBackground}`;
+        }};
+        box-shadow: 0 0 12px ${props => props.theme.primary}1f;
     }
 
     &:hover {
@@ -139,10 +152,16 @@ const ModalCard = styled.div`
         text-align: center;
     }
 
-    img {
-        width: 150px;
+    .glyph-large {
+        width: 120px;
+        height: 120px;
+        border-radius: 24px;
         margin-bottom: 1.5rem;
-        filter: drop-shadow(0 0 15px ${props => props.theme.primary}66);
+        border: 1px solid ${props => props.theme.border};
+        background: radial-gradient(circle at 30% 30%, ${props => props.theme.primary}55, transparent 60%),
+          radial-gradient(circle at 70% 70%, ${props => props.theme.secondary}44, transparent 65%),
+          ${props => props.theme.cardBackground};
+        box-shadow: 0 0 22px ${props => props.theme.primary}22;
     }
 
     h4 {
@@ -150,6 +169,7 @@ const ModalCard = styled.div`
         color: ${props => props.theme.primary};
         font-size: 1.8rem;
         margin-bottom: 0.5rem;
+        overflow-wrap: anywhere;
     }
 
     .descricao {
@@ -158,6 +178,7 @@ const ModalCard = styled.div`
         line-height: 1.5;
         margin-bottom: 1.5rem;
         color: ${props => props.theme.text}cc;
+        overflow-wrap: anywhere;
     }
 
     .meta {
@@ -167,6 +188,8 @@ const ModalCard = styled.div`
         font-family: ${props => props.theme.fontCode};
         text-transform: uppercase;
         font-size: 0.9rem;
+        flex-wrap: wrap;
+        justify-content: center;
     }
 
     button.add-cart {
@@ -209,6 +232,12 @@ function Pesquisa() {
         setItemSelecionado(null);
     }
 
+    const formatZan = (value) => {
+        const numberValue = Number(value)
+        if (!Number.isFinite(numberValue)) return '—'
+        return `${numberValue.toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} ZAN`
+    }
+
     return (
         <PesquisaContainer>
             <Titulo>Inventário de Zaun</Titulo>
@@ -226,10 +255,7 @@ function Pesquisa() {
 
             {pocoesPesquisadas.map(pocao => (
                 <Resultado key={pocao.id} tipo={pocao.tipo} onClick={() => setItemSelecionado(pocao)}>
-                    <img
-                        src={require(`../../img/${pocao.src}`)}
-                        alt={pocao.nome}
-                    />
+                    <div className="glyph" aria-hidden="true" />
                     <div className="info">
                         <p className="nome">{pocao.nome}</p>
                         <div className="detalhes">
@@ -238,7 +264,7 @@ function Pesquisa() {
                         </div>
                     </div>
                     <div className="preco">
-                        {pocao.preco.toLocaleString('pt-BR', { style: 'currency', currency: 'ZAN', minimumFractionDigits: 1 })}
+                        {formatZan(pocao.preco)}
                     </div>
                 </Resultado>
             ))}
@@ -248,14 +274,14 @@ function Pesquisa() {
                     <ModalCard onClick={e => e.stopPropagation()}>
                         <button className="close" onClick={() => setItemSelecionado(null)}>&times;</button>
                         <div className="modal-content">
-                            <img src={require(`../../img/${itemSelecionado.src}`)} alt={itemSelecionado.nome} />
+                            <div className="glyph-large" aria-hidden="true" />
                             <h4>{itemSelecionado.nome}</h4>
                             <p className="descricao">{itemSelecionado.descricao}</p>
                             <div className="meta">
                                 <span style={{ color: itemSelecionado.tipo === 'berserk' ? '#a855f7' : '#4ade80' }}>
                                     {itemSelecionado.tipo}
                                 </span>
-                                <span>Preço: {itemSelecionado.preco} ZAN</span>
+                                <span>Preço: {formatZan(itemSelecionado.preco)}</span>
                             </div>
                             <button className="add-cart" onClick={() => adicionarAoCarrinho(itemSelecionado)}>
                                 INJETAR NO SISTEMA (ADICIONAR)

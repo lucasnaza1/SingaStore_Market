@@ -1,6 +1,5 @@
 import Logo from '../../components/Logo'
 import Paginas from '../../components/Pagina'
-import Icones from '../../components/Icone'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { useCart } from '../../contexts/CartContext'

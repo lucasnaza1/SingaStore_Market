@@ -8,7 +8,6 @@ const IconesContainer = styled.ul`
 function Icones(){
     return(
        <IconesContainer>
-          {/* Carrinho removido conforme solicitado */}
         </IconesContainer>
     )
 }
